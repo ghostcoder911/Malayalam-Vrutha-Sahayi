@@ -1,0 +1,6 @@
+Malayalam śloka text copied for automated testing from public blog posts.
+
+Source page: https://aksharaslokam.blogspot.com/2005/02/
+Blog title: അക്ഷരശ്ലോകസദസ്സ് (Akshara Sloka Sadass), Feb 2005 archive.
+
+Each .txt file contains verse lines only (no metadata). Poets and works are named in the filename where helpful.
