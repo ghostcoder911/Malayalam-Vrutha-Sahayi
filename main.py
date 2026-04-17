@@ -2,7 +2,10 @@
 """Vrutha Sahayi web — FastAPI wrapper around the ported 0.1 engine."""
 from pathlib import Path
 
+import os
+
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
@@ -12,6 +15,16 @@ from vruthasahayi.matra import getMatraArray
 from vruthasahayi.nearest_vrutham import nearest_catalog_matches
 
 app = FastAPI(title="Vrutha Sahayi Web", version="1.0.0")
+
+_cors = os.getenv("CORS_ORIGINS", "").strip()
+_allow = [x.strip() for x in _cors.split(",") if x.strip()] if _cors else ["*"]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=_allow,
+    allow_credentials=False,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 def _line_gl_patterns_for_find(gl_array):

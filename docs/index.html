@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Vrutha Sahayi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Noto+Sans+Malayalam:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="static/style.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <p class="eyebrow">Malayalam prosody</p>
+      <h1>Vrutha Sahayi</h1>
+      <p class="lead">
+        Discover or verify the classical <span class="ml">വൃത്തം</span> (meter) of your verse—faithful to the original Vrutha Sahayi 0.1 engine.
+        Use Unicode Malayalam; mark <em>yathi</em> with spaces or <kbd>/</kbd> between feet.
+      </p>
+      <p class="lead gh-pages-api-note" id="api-note" hidden style="font-size:0.92rem; max-width:36rem; margin:0.75rem auto 0;">
+        This GitHub Pages build needs a deployed API. Set <code>window.__API_BASE__</code> in this file to your FastAPI URL (no trailing slash), then redeploy.
+      </p>
+    </header>
+
+    <div class="layout">
+      <section class="panel panel-input" aria-labelledby="input-heading">
+        <h2 id="input-heading" class="panel-title">Your text</h2>
+
+        <fieldset class="mode-group">
+          <legend class="visually-hidden">Analysis mode</legend>
+          <label class="mode-pill">
+            <input type="radio" name="mode" value="find" checked />
+            <span class="mode-pill-inner">Find meter</span>
+          </label>
+          <label class="mode-pill">
+            <input type="radio" name="mode" value="check" />
+            <span class="mode-pill-inner">Check meter</span>
+          </label>
+        </fieldset>
+
+        <div class="field field-meter">
+          <label for="vrutham">Expected meter <span class="hint">(check mode only)</span></label>
+          <div class="select-wrap">
+            <select id="vrutham" disabled></select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="text">Poem</label>
+          <textarea id="text" rows="12" placeholder="ഓരോ വരി പുതിയ വരിയിൽ. ശ്ലോകങ്ങൾക്കിടയിൽ ഒഴിഞ്ഞ വരി…"></textarea>
+        </div>
+
+        <button type="button" id="go" class="btn-primary">
+          <span class="btn-label">Analyze</span>
+          <span class="btn-spinner" aria-hidden="true"></span>
+        </button>
+      </section>
+
+      <section class="panel panel-result" aria-live="polite" aria-labelledby="result-heading">
+        <div class="panel-result-head">
+          <h2 id="result-heading" class="panel-title">Results</h2>
+          <p id="result-sub" class="result-sub muted"></p>
+        </div>
+
+        <div id="result-empty" class="result-empty">
+          <div class="result-empty-icon" aria-hidden="true"></div>
+          <p>Run an analysis to see meter names, line-by-line guesses, or syllable checks here.</p>
+        </div>
+
+        <p id="result-loading" class="result-loading" hidden>Analyzing…</p>
+
+        <div id="result-error" class="result-banner result-banner-error" hidden></div>
+
+        <div id="result-find" class="result-body" hidden></div>
+        <div id="result-check" class="result-body" hidden></div>
+
+        <details id="result-raw" class="raw-details" hidden>
+          <summary>Technical details</summary>
+          <pre id="raw-json" class="raw-pre"></pre>
+        </details>
+      </section>
+    </div>
+
+    <footer class="site-footer">
+      <p>Based on Vrutha Sahayi (2007) by Sushen V Kumar &amp; Sanjeev Kozhisseri · GPL-2.0</p>
+    </footer>
+  </div>
+
+  <!-- FastAPI base URL (no trailing slash). Required on github.io; leave "" when using local uvicorn with root static/. -->
+  <script>
+    window.__API_BASE__ = "";
+    if (window.location.hostname.endsWith("github.io") && !String(window.__API_BASE__).trim()) {
+      var n = document.getElementById("api-note");
+      if (n) n.hidden = false;
+    }
+  </script>
+  <script src="static/app.js"></script>
+</body>
+</html>
